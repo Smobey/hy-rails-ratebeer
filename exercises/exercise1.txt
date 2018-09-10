@@ -1,0 +1,309 @@
+[11] pry(main)> Beer.all
+  Beer Load (1.0ms)  SELECT "beers".* FROM "beers"
+=> [#<Beer:0x3bd2c28
+  id: 1,
+  name: "Iso 3",
+  style: "Lager",
+  brewery_id: 1,
+  created_at: Sat, 08 Sep 2018 13:32:04 UTC +00:00,
+  updated_at: Sat, 08 Sep 2018 13:32:04 UTC +00:00>,
+ #<Beer:0x3bd2a18
+  id: 2,
+  name: "Karhu",
+  style: "Lager",
+  brewery_id: 1,
+  created_at: Sat, 08 Sep 2018 13:32:04 UTC +00:00,
+  updated_at: Sat, 08 Sep 2018 13:32:04 UTC +00:00>,
+ #<Beer:0x3bd2748
+  id: 3,
+  name: "Tuplahumala",
+  style: "Lager",
+  brewery_id: 1,
+  created_at: Sat, 08 Sep 2018 13:32:04 UTC +00:00,
+  updated_at: Sat, 08 Sep 2018 13:32:04 UTC +00:00>,
+ #<Beer:0x3bd2298
+  id: 4,
+  name: "Huvila Pale Ale",
+  style: "Pale Ale",
+  brewery_id: 2,
+  created_at: Sat, 08 Sep 2018 13:32:04 UTC +00:00,
+  updated_at: Sat, 08 Sep 2018 13:32:04 UTC +00:00>,
+ #<Beer:0x3bd1f98
+  id: 5,
+  name: "X Porter",
+  style: "Porter",
+  brewery_id: 2,
+  created_at: Sat, 08 Sep 2018 13:32:04 UTC +00:00,
+  updated_at: Sat, 08 Sep 2018 13:32:04 UTC +00:00>,
+ #<Beer:0x3bd1620
+  id: 6,
+  name: "Hefeweizen",
+  style: "Weizen",
+  brewery_id: 3,
+  created_at: Sat, 08 Sep 2018 13:32:04 UTC +00:00,
+  updated_at: Sat, 08 Sep 2018 13:32:04 UTC +00:00>,
+ #<Beer:0x3bd13b0
+  id: 7,
+  name: "Helles",
+  style: "Lager",
+  brewery_id: 3,
+  created_at: Sat, 08 Sep 2018 13:32:04 UTC +00:00,
+  updated_at: Sat, 08 Sep 2018 13:32:04 UTC +00:00>]
+[12] pry(main)> Rating.all
+  Rating Load (0.0ms)  SELECT "ratings".* FROM "ratings"
+=> []
+[13] pry(main)> Kala.all
+NameError: uninitialized constant Kala
+from (pry):12:in `__pry__'
+[14] pry(main)> reload!
+Reloading...
+=> true
+[15] pry(main)> b = Beer.first
+  Beer Load (0.0ms)  SELECT  "beers".* FROM "beers" ORDER BY "beers"."id" ASC LIMIT ?  [["LIMIT", 1]]
+=> #<Beer:0x6bd1068
+ id: 1,
+ name: "Iso 3",
+ style: "Lager",
+ brewery_id: 1,
+ created_at: Sat, 08 Sep 2018 13:32:04 UTC +00:00,
+ updated_at: Sat, 08 Sep 2018 13:32:04 UTC +00:00>
+[16] pry(main)> b.ratings.create score: 10
+   (0.0ms)  begin transaction
+  SQL (8.4ms)  INSERT INTO "ratings" ("score", "beer_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["score", 10], ["beer_id", 1], ["created_at", "2018-09-10 09:33:22.518690"], ["updated_at", "2018-09-10 09:33:22.518690"]]
+   (6.7ms)  commit transaction
+=> #<Rating:0x6f7dd18
+ id: 1,
+ score: 10,
+ beer_id: 1,
+ created_at: Mon, 10 Sep 2018 09:33:22 UTC +00:00,
+ updated_at: Mon, 10 Sep 2018 09:33:22 UTC +00:00>
+[17] pry(main)> b.ratings.create score: 21
+   (0.0ms)  begin transaction
+  SQL (8.5ms)  INSERT INTO "ratings" ("score", "beer_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["score", 21], ["beer_id", 1], ["created_at", "2018-09-10 09:33:25.469961"], ["updated_at", "2018-09-10 09:33:25.469961"]]
+   (7.0ms)  commit transaction
+=> #<Rating:0x7244598
+ id: 2,
+ score: 21,
+ beer_id: 1,
+ created_at: Mon, 10 Sep 2018 09:33:25 UTC +00:00,
+ updated_at: Mon, 10 Sep 2018 09:33:25 UTC +00:00>
+[18] pry(main)> b.ratings.create score: 17
+   (0.0ms)  begin transaction
+  SQL (8.4ms)  INSERT INTO "ratings" ("score", "beer_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["score", 17], ["beer_id", 1], ["created_at", "2018-09-10 09:33:31.973953"], ["updated_at", "2018-09-10 09:33:31.973953"]]
+   (10.0ms)  commit transaction
+=> #<Rating:0x7679718
+ id: 3,
+ score: 17,
+ beer_id: 1,
+ created_at: Mon, 10 Sep 2018 09:33:31 UTC +00:00,
+ updated_at: Mon, 10 Sep 2018 09:33:31 UTC +00:00>
+[19] pry(main)> brewery.first
+NameError: undefined local variable or method `brewery' for main:Object
+from (pry):18:in `__pry__'
+[20] pry(main)> Brewery.first
+  Brewery Load (0.0ms)  SELECT  "breweries".* FROM "breweries" ORDER BY "breweries"."id" ASC LIMIT ?  [["LIMIT", 1]]
+=> #<Brewery:0x45f3be8
+ id: 1,
+ name: "Koff",
+ year: 1897,
+ created_at: Sat, 08 Sep 2018 13:32:04 UTC +00:00,
+ updated_at: Sat, 08 Sep 2018 13:32:04 UTC +00:00>
+[21] pry(main)> Brewery.create name: "BrewDog", year: 2007
+   (0.0ms)  begin transaction
+  SQL (8.0ms)  INSERT INTO "breweries" ("name", "year", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["name", "BrewDog"], ["year", 2007], ["created_at", "2018-09-10 09:34:12.469838"], ["updated_at", "2018-09-10 09:34:12.469838"]]
+   (6.8ms)  commit transaction
+=> #<Brewery:0x6f8e248
+ id: 6,
+ name: "BrewDog",
+ year: 2007,
+ created_at: Mon, 10 Sep 2018 09:34:12 UTC +00:00,
+ updated_at: Mon, 10 Sep 2018 09:34:12 UTC +00:00>
+[22] pry(main)> bd = _
+=> #<Brewery:0x6f8e248
+ id: 6,
+ name: "BrewDog",
+ year: 2007,
+ created_at: Mon, 10 Sep 2018 09:34:12 UTC +00:00,
+ updated_at: Mon, 10 Sep 2018 09:34:12 UTC +00:00>
+[23] pry(main)> Beer.first
+  Beer Load (0.0ms)  SELECT  "beers".* FROM "beers" ORDER BY "beers"."id" ASC LIMIT ?  [["LIMIT", 1]]
+=> #<Beer:0x69da280
+ id: 1,
+ name: "Iso 3",
+ style: "Lager",
+ brewery_id: 1,
+ created_at: Sat, 08 Sep 2018 13:32:04 UTC +00:00,
+ updated_at: Sat, 08 Sep 2018 13:32:04 UTC +00:00>
+[24] pry(main)> bd.beers.create name: "Punk IPA", style: "IPA"
+   (0.0ms)  begin transaction
+  SQL (8.8ms)  INSERT INTO "beers" ("name", "style", "brewery_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Punk IPA"], ["style", "IPA"], ["brewery_id", 6], ["created_at", "2018-09-10 09:35:14.352707"], ["updated_at", "2018-09-10 09:35:14.352707"]]
+   (8.0ms)  commit transaction
+=> #<Beer:0x5799d20
+ id: 11,
+ name: "Punk IPA",
+ style: "IPA",
+ brewery_id: 6,
+ created_at: Mon, 10 Sep 2018 09:35:14 UTC +00:00,
+ updated_at: Mon, 10 Sep 2018 09:35:14 UTC +00:00>
+[25] pry(main)> bd.beers.create name: "Nanny State", style: "lowalcohol"
+   (0.0ms)  begin transaction
+  SQL (8.2ms)  INSERT INTO "beers" ("name", "style", "brewery_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Nanny State"], ["style", "lowalcohol"], ["brewery_id", 6], ["created_at", "2018-09-10 09:35:27.581975"], ["updated_at", "2018-09-10 09:35:27.581975"]]
+   (7.0ms)  commit transaction
+=> #<Beer:0x5aa6818
+ id: 12,
+ name: "Nanny State",
+ style: "lowalcohol",
+ brewery_id: 6,
+ created_at: Mon, 10 Sep 2018 09:35:27 UTC +00:00,
+ updated_at: Mon, 10 Sep 2018 09:35:27 UTC +00:00>
+[26] pry(main)> b = bd.beers.find_by name: "Nanny State"
+  Beer Load (1.0ms)  SELECT  "beers".* FROM "beers" WHERE "beers"."brewery_id" = ? AND "beers"."name" = ? LIMIT ?  [["brewery_id", 6], ["name", "Nanny State"], ["LIMIT", 1]]
+=> #<Beer:0x57991e0
+ id: 12,
+ name: "Nanny State",
+ style: "lowalcohol",
+ brewery_id: 6,
+ created_at: Mon, 10 Sep 2018 09:35:27 UTC +00:00,
+ updated_at: Mon, 10 Sep 2018 09:35:27 UTC +00:00>
+[27] pry(main)> b.ratings.create score: 23
+   (0.0ms)  begin transaction
+  SQL (8.4ms)  INSERT INTO "ratings" ("score", "beer_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["score", 23], ["beer_id", 12], ["created_at", "2018-09-10 09:36:39.572632"], ["updated_at", "2018-09-10 09:36:39.572632"]]
+   (8.0ms)  commit transaction
+=> #<Rating:0x6a88ee0
+ id: 4,
+ score: 23,
+ beer_id: 12,
+ created_at: Mon, 10 Sep 2018 09:36:39 UTC +00:00,
+ updated_at: Mon, 10 Sep 2018 09:36:39 UTC +00:00>
+[28] pry(main)> b.ratings.create score: 96
+   (0.0ms)  begin transaction
+  SQL (8.1ms)  INSERT INTO "ratings" ("score", "beer_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["score", 96], ["beer_id", 12], ["created_at", "2018-09-10 09:36:43.052949"], ["updated_at", "2018-09-10 09:36:43.052949"]]
+   (7.0ms)  commit transaction
+=> #<Rating:0x6d14db0
+ id: 5,
+ score: 96,
+ beer_id: 12,
+ created_at: Mon, 10 Sep 2018 09:36:43 UTC +00:00,
+ updated_at: Mon, 10 Sep 2018 09:36:43 UTC +00:00>
+[29] pry(main)> b.ratings.create score: 44
+   (0.0ms)  begin transaction
+  SQL (8.1ms)  INSERT INTO "ratings" ("score", "beer_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["score", 44], ["beer_id", 12], ["created_at", "2018-09-10 09:36:52.020766"], ["updated_at", "2018-09-10 09:36:52.020766"]]
+   (7.1ms)  commit transaction
+=> #<Rating:0x72cd950
+ id: 6,
+ score: 44,
+ beer_id: 12,
+ created_at: Mon, 10 Sep 2018 09:36:52 UTC +00:00,
+ updated_at: Mon, 10 Sep 2018 09:36:52 UTC +00:00>
+[30] pry(main)> b = bd.beers.find_by name: "Punk IPA"
+  Beer Load (0.0ms)  SELECT  "beers".* FROM "beers" WHERE "beers"."brewery_id" = ? AND "beers"."name" = ? LIMIT ?  [["brewery_id", 6], ["name", "Punk IPA"], ["LIMIT", 1]]
+=> #<Beer:0x6a18e48
+ id: 11,
+ name: "Punk IPA",
+ style: "IPA",
+ brewery_id: 6,
+ created_at: Mon, 10 Sep 2018 09:35:14 UTC +00:00,
+ updated_at: Mon, 10 Sep 2018 09:35:14 UTC +00:00>
+[31] pry(main)> b.ratings.create score: 78
+   (0.0ms)  begin transaction
+  SQL (8.2ms)  INSERT INTO "ratings" ("score", "beer_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["score", 78], ["beer_id", 11], ["created_at", "2018-09-10 09:37:00.542092"], ["updated_at", "2018-09-10 09:37:00.542092"]]
+   (7.0ms)  commit transaction
+=> #<Rating:0x58a7cd8
+ id: 7,
+ score: 78,
+ beer_id: 11,
+ created_at: Mon, 10 Sep 2018 09:37:00 UTC +00:00,
+ updated_at: Mon, 10 Sep 2018 09:37:00 UTC +00:00>
+[32] pry(main)> b.ratings.create score: 88
+   (0.0ms)  begin transaction
+  SQL (8.0ms)  INSERT INTO "ratings" ("score", "beer_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["score", 88], ["beer_id", 11], ["created_at", "2018-09-10 09:37:01.869291"], ["updated_at", "2018-09-10 09:37:01.869291"]]
+   (7.0ms)  commit transaction
+=> #<Rating:0x53b8780
+ id: 8,
+ score: 88,
+ beer_id: 11,
+ created_at: Mon, 10 Sep 2018 09:37:01 UTC +00:00,
+ updated_at: Mon, 10 Sep 2018 09:37:01 UTC +00:00>
+[33] pry(main)> b.ratings.create score: 76
+   (0.0ms)  begin transaction
+  SQL (8.3ms)  INSERT INTO "ratings" ("score", "beer_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["score", 76], ["beer_id", 11], ["created_at", "2018-09-10 09:37:03.757662"], ["updated_at", "2018-09-10 09:37:03.757662"]]
+   (7.0ms)  commit transaction
+=> #<Rating:0x425d408
+ id: 9,
+ score: 76,
+ beer_id: 11,
+ created_at: Mon, 10 Sep 2018 09:37:03 UTC +00:00,
+ updated_at: Mon, 10 Sep 2018 09:37:03 UTC +00:00>
+[34] pry(main)> b.ratings.create score: 84
+   (0.0ms)  begin transaction
+  SQL (8.1ms)  INSERT INTO "ratings" ("score", "beer_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["score", 84], ["beer_id", 11], ["created_at", "2018-09-10 09:37:06.908657"], ["updated_at", "2018-09-10 09:37:06.908657"]]
+   (6.8ms)  commit transaction
+=> #<Rating:0x6dad930
+ id: 10,
+ score: 84,
+ beer_id: 11,
+ created_at: Mon, 10 Sep 2018 09:37:06 UTC +00:00,
+ updated_at: Mon, 10 Sep 2018 09:37:06 UTC +00:00>
+[35] pry(main)> Rating.all
+  Rating Load (0.0ms)  SELECT "ratings".* FROM "ratings"
+=> [#<Rating:0x6e74350
+  id: 1,
+  score: 10,
+  beer_id: 1,
+  created_at: Mon, 10 Sep 2018 09:33:22 UTC +00:00,
+  updated_at: Mon, 10 Sep 2018 09:33:22 UTC +00:00>,
+ #<Rating:0x6e74230
+  id: 2,
+  score: 21,
+  beer_id: 1,
+  created_at: Mon, 10 Sep 2018 09:33:25 UTC +00:00,
+  updated_at: Mon, 10 Sep 2018 09:33:25 UTC +00:00>,
+ #<Rating:0x6e74140
+  id: 3,
+  score: 17,
+  beer_id: 1,
+  created_at: Mon, 10 Sep 2018 09:33:31 UTC +00:00,
+  updated_at: Mon, 10 Sep 2018 09:33:31 UTC +00:00>,
+ #<Rating:0x6e74038
+  id: 4,
+  score: 23,
+  beer_id: 12,
+  created_at: Mon, 10 Sep 2018 09:36:39 UTC +00:00,
+  updated_at: Mon, 10 Sep 2018 09:36:39 UTC +00:00>,
+ #<Rating:0x707f7d8
+  id: 5,
+  score: 96,
+  beer_id: 12,
+  created_at: Mon, 10 Sep 2018 09:36:43 UTC +00:00,
+  updated_at: Mon, 10 Sep 2018 09:36:43 UTC +00:00>,
+ #<Rating:0x707fb98
+  id: 6,
+  score: 44,
+  beer_id: 12,
+  created_at: Mon, 10 Sep 2018 09:36:52 UTC +00:00,
+  updated_at: Mon, 10 Sep 2018 09:36:52 UTC +00:00>,
+ #<Rating:0x707fe98
+  id: 7,
+  score: 78,
+  beer_id: 11,
+  created_at: Mon, 10 Sep 2018 09:37:00 UTC +00:00,
+  updated_at: Mon, 10 Sep 2018 09:37:00 UTC +00:00>,
+ #<Rating:0x707ff40
+  id: 8,
+  score: 88,
+  beer_id: 11,
+  created_at: Mon, 10 Sep 2018 09:37:01 UTC +00:00,
+  updated_at: Mon, 10 Sep 2018 09:37:01 UTC +00:00>,
+ #<Rating:0x707fe50
+  id: 9,
+  score: 76,
+  beer_id: 11,
+  created_at: Mon, 10 Sep 2018 09:37:03 UTC +00:00,
+  updated_at: Mon, 10 Sep 2018 09:37:03 UTC +00:00>,
+ #<Rating:0x707fd48
+  id: 10,
+  score: 84,
+  beer_id: 11,
+  created_at: Mon, 10 Sep 2018 09:37:06 UTC +00:00,
+  updated_at: Mon, 10 Sep 2018 09:37:06 UTC +00:00>]
+[36] pry(main)>
