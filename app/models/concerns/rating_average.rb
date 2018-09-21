@@ -4,6 +4,6 @@ module RatingAverage
   def average_rating
     scores = ratings.map(&:score)
     average = scores.reduce(:+).to_f / scores.size
-    "Has #{pluralize(ratings.count, 'rating')}, average #{average}"
+    "#{pluralize(ratings.count, 'rating')}, average #{average}"
   end
 end
