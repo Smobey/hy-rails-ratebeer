@@ -1,4 +1,5 @@
 module RatingAverage
+  include ActionView::Helpers::TextHelper
   extend ActiveSupport::Concern
 
   def average_rating
