@@ -7,6 +7,7 @@ class Beer < ApplicationRecord
   has_many :raters, -> { distinct }, through: :ratings, source: :user
 
   validates :name, length: { minimum: 1 }
+  validates :style, presence: true
 
   def average
     if ratings.count.zero?

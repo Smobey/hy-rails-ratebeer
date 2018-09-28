@@ -10,6 +10,11 @@ class User < ApplicationRecord
   has_many :beers, through: :ratings
   has_many :clubs, through: :membership
 
+  def favorite_beer
+    return nil if ratings.empty?
+    ratings.order(score: :desc).limit(1).first.beer
+  end
+
   def to_s
     "#{username}"
   end
