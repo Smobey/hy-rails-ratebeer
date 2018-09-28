@@ -30,5 +30,14 @@ describe "User" do
       expect(current_path).to eq(signin_path)
       expect(page).to have_content 'Username and/or password mismatch'
     end
+
+    it "can successfully delete their own ratings" do
+      FactoryBot.create(:rating, beer: beer1, user: user)
+      FactoryBot.create(:rating, beer: beer2, user: user)
+      sign_in(username: "Pekka", password: "Foobar1")
+      visit user_path(user)
+      page.first(:link, "delete").click
+      expect(user.ratings.count).to eq(1)
+    end
   end
 end
